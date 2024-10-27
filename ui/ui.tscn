@@ -1,12 +1,27 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=8 format=3 uid="uid://bpny7w44q3lst"]
+=======
+[gd_scene load_steps=11 format=3 uid="uid://bpny7w44q3lst"]
+>>>>>>> Stashed changes
 
 [ext_resource type="Script" path="res://ui/ui.gd" id="1_coeg4"]
 [ext_resource type="FontFile" uid="uid://bedbafqcdtba4" path="res://assets/fonts/superstar_memesbruh03.ttf" id="2_fvxlv"]
 [ext_resource type="Texture2D" uid="uid://jty2eo47g240" path="res://assets/sprites/rec_icon.png" id="3_t1odi"]
 [ext_resource type="Texture2D" uid="uid://b53qler8hga2n" path="res://assets/sprites/paint.png" id="4_e7svf"]
 [ext_resource type="Texture2D" uid="uid://duyswy50vspgt" path="res://assets/sprites/map.png" id="5_5tula"]
+<<<<<<< Updated upstream
 [ext_resource type="Script" path="res://ui/monitoring/cameras.gd" id="5_sbjt5"]
 [ext_resource type="PackedScene" uid="uid://c5ejlyes0v27k" path="res://ui/settings/settings.tscn" id="7_c42k5"]
+=======
+[ext_resource type="Texture2D" uid="uid://dubqsphrcmdog" path="res://assets/placeholder_sprites/generator.png" id="5_b5u10"]
+[ext_resource type="Script" path="res://ui/monitoring/cameras.gd" id="5_sbjt5"]
+[ext_resource type="PackedScene" uid="uid://c5ejlyes0v27k" path="res://ui/settings/settings.tscn" id="7_c42k5"]
+[ext_resource type="Script" path="res://ui/generator.gd" id="8_sr4vw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3ls6s"]
+font = ExtResource("2_fvxlv")
+font_size = 151
+>>>>>>> Stashed changes
 
 [node name="UI" type="CanvasLayer" groups=["UI"]]
 script = ExtResource("1_coeg4")
@@ -136,6 +151,53 @@ offset_top = -49.0
 grow_horizontal = 2
 grow_vertical = 0
 
+<<<<<<< Updated upstream
+=======
+[node name="GeneratorIcon" type="Button" parent="Desktop"]
+offset_left = 97.0
+offset_top = 533.0
+offset_right = 314.0
+offset_bottom = 713.0
+scale = Vector2(0.882722, 0.882722)
+theme_type_variation = &"FlatButton"
+theme_override_fonts/font = ExtResource("2_fvxlv")
+theme_override_font_sizes/font_size = 32
+
+[node name="TextureRect" type="TextureRect" parent="Desktop/GeneratorIcon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -285.226
+offset_top = -186.293
+offset_right = 919.774
+offset_bottom = 536.707
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.438065, 0.438065)
+texture = ExtResource("5_b5u10")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Desktop/GeneratorIcon"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -32.0
+offset_right = 128.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_fvxlv")
+theme_override_font_sizes/font_size = 32
+text = "Generator"
+horizontal_alignment = 1
+
+>>>>>>> Stashed changes
 [node name="Cameras" type="Control" parent="."]
 visible = false
 layout_mode = 3
@@ -246,8 +308,68 @@ color = Color(0.27171, 0.163794, 0.324938, 1)
 [node name="Settings" parent="." instance=ExtResource("7_c42k5")]
 visible = false
 
+<<<<<<< Updated upstream
 [connection signal="pressed" from="Desktop/MonitoringIcon" to="." method="show_screen" binds= ["Cameras"]]
 [connection signal="pressed" from="Desktop/BackBtn" to="." method="hide_ui"]
+=======
+[node name="Generator" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_sr4vw")
+
+[node name="ColorRect" type="ColorRect" parent="Generator"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.118401, 0.148087, 0.175947, 1)
+
+[node name="HSplitContainer" type="HSplitContainer" parent="Generator"]
+layout_mode = 0
+offset_left = 452.0
+offset_top = 477.0
+offset_right = 1458.0
+offset_bottom = 615.0
+dragger_visibility = 2
+
+[node name="ColorRect" type="ColorRect" parent="Generator/HSplitContainer"]
+layout_mode = 2
+color = Color(0, 0.411765, 0.117647, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Generator/HSplitContainer"]
+layout_mode = 2
+color = Color(0.6, 0.0941176, 0.172549, 1)
+
+[node name="Label" type="Label" parent="Generator"]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 296.0
+offset_right = 1409.0
+offset_bottom = 448.0
+label_settings = SubResource("LabelSettings_3ls6s")
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="BackBtn" type="Button" parent="Generator"]
+offset_left = 837.0
+offset_top = 23.0
+offset_right = 1034.0
+offset_bottom = 98.0
+theme_override_fonts/font = ExtResource("2_fvxlv")
+theme_override_font_sizes/font_size = 32
+text = "Back"
+
+[connection signal="pressed" from="Desktop/MonitoringIcon" to="." method="show_screen" binds= ["Cameras"]]
+[connection signal="pressed" from="Desktop/BackBtn" to="." method="hide_ui"]
+[connection signal="pressed" from="Desktop/GeneratorIcon" to="." method="show_screen" binds= ["Generator"]]
+>>>>>>> Stashed changes
 [connection signal="pressed" from="Cameras/Map/Button" to="Cameras" method="show_camera" binds= ["1"]]
 [connection signal="pressed" from="Cameras/Map/Button2" to="Cameras" method="show_camera" binds= ["2"]]
 [connection signal="pressed" from="Cameras/Map/Button3" to="Cameras" method="show_camera" binds= ["3"]]
@@ -257,3 +379,7 @@ visible = false
 [connection signal="pressed" from="Cameras/Map/Button7" to="Cameras" method="show_camera" binds= ["2"]]
 [connection signal="pressed" from="Cameras/Map/Button8" to="Cameras" method="show_camera" binds= ["3"]]
 [connection signal="pressed" from="Cameras/BackBtn" to="." method="hide_ui"]
+<<<<<<< Updated upstream
+=======
+[connection signal="pressed" from="Generator/BackBtn" to="." method="hide_ui"]
+>>>>>>> Stashed changes
