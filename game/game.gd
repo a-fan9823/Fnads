@@ -6,13 +6,10 @@ signal on_power_level_changed(new_level: int)
 #changes when power hits zero
 signal on_power_state_changed(power_state: bool)
 func _ready():
-<<<<<<< Updated upstream
-=======
 	if generator_power < 0:
 		generator_power = 0
 	if generator_power > 100:
 		generator_power = 100
->>>>>>> Stashed changes
 	break_power(3)
 	
 func break_power(time: int):
