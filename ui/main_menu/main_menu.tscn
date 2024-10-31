@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0dfo8lc0utw8"]
+[gd_scene load_steps=6 format=3 uid="uid://c0dfo8lc0utw8"]
 
 [ext_resource type="FontFile" uid="uid://bedbafqcdtba4" path="res://assets/fonts/superstar_memesbruh03.ttf" id="1_ee1jd"]
 [ext_resource type="Script" path="res://ui/main_menu/main_menu.gd" id="1_m2tqj"]
 [ext_resource type="Texture2D" uid="uid://bt2ox8jxjg30f" path="res://assets/sprites/cerber_bg.png" id="3_bajt5"]
+[ext_resource type="Script" path="res://ui/main_menu/settings.gd" id="4_wmhq3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6eh4t"]
+font = ExtResource("1_ee1jd")
+font_size = 25
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_m2tqj")
@@ -28,6 +33,7 @@ expand_mode = 2
 stretch_mode = 5
 
 [node name="Screen1" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -56,48 +62,96 @@ theme_override_font_sizes/font_size = 64
 text = "Settings"
 
 [node name="Screen2" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("4_wmhq3")
+
+[node name="ColorRect" type="ColorRect" parent="Screen2"]
+self_modulate = Color(1, 1, 1, 0.552941)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="BackBtn" type="Button" parent="Screen2"]
 layout_mode = 0
-offset_left = 150.0
-offset_top = 200.0
-offset_right = 750.0
-offset_bottom = 350.0
+offset_left = 21.0
+offset_top = 19.0
+offset_right = 212.0
+offset_bottom = 91.0
 theme_override_fonts/font = ExtResource("1_ee1jd")
 theme_override_font_sizes/font_size = 64
-text = "Back"
+text = "< Back"
 
-[node name="Label" type="Label" parent="Screen2"]
-layout_mode = 0
-offset_left = 235.0
-offset_top = 451.0
-offset_right = 627.0
-offset_bottom = 515.0
-theme_override_fonts/font = ExtResource("1_ee1jd")
-theme_override_font_sizes/font_size = 64
-text = "Some settings"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="ScrollContainer" type="ScrollContainer" parent="Screen2"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1118.0
+offset_top = 156.0
+offset_right = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+horizontal_scroll_mode = 0
 
-[node name="Label2" type="Label" parent="Screen2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Screen2/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 56
+
+[node name="HSlider" type="HSlider" parent="Screen2/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+value = 100.0
+tick_count = 3
+
+[node name="Label" type="Label" parent="Screen2/ScrollContainer/VBoxContainer/HSlider"]
 layout_mode = 0
-offset_left = 235.0
-offset_top = 562.0
-offset_right = 627.0
-offset_bottom = 626.0
-theme_override_fonts/font = ExtResource("1_ee1jd")
-theme_override_font_sizes/font_size = 64
-text = "Some settings"
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = -227.0
+offset_right = -71.0
+offset_bottom = 26.0
+text = "Master volume"
+label_settings = SubResource("LabelSettings_6eh4t")
+
+[node name="HSlider2" type="HSlider" parent="Screen2/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+value = 100.0
+tick_count = 3
+
+[node name="Label" type="Label" parent="Screen2/ScrollContainer/VBoxContainer/HSlider2"]
+layout_mode = 0
+offset_left = -227.0
+offset_right = -71.0
+offset_bottom = 26.0
+text = "Sound volume"
+label_settings = SubResource("LabelSettings_6eh4t")
+
+[node name="HSlider3" type="HSlider" parent="Screen2/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+value = 100.0
+tick_count = 3
+
+[node name="Label" type="Label" parent="Screen2/ScrollContainer/VBoxContainer/HSlider3"]
+layout_mode = 0
+offset_left = -227.0
+offset_right = -46.0
+offset_bottom = 26.0
+text = "Ambience volume"
+label_settings = SubResource("LabelSettings_6eh4t")
 
 [connection signal="pressed" from="Screen1/StartGameBtn" to="." method="change_screen" binds= ["game"]]
 [connection signal="pressed" from="Screen1/SettingsBtn" to="." method="change_screen" binds= ["settings"]]
 [connection signal="pressed" from="Screen2/BackBtn" to="." method="change_screen" binds= ["main"]]
+[connection signal="value_changed" from="Screen2/ScrollContainer/VBoxContainer/HSlider" to="Screen2" method="_on_slider_changed" binds= [0]]
+[connection signal="value_changed" from="Screen2/ScrollContainer/VBoxContainer/HSlider2" to="Screen2" method="_on_slider_changed" binds= [1]]
+[connection signal="value_changed" from="Screen2/ScrollContainer/VBoxContainer/HSlider3" to="Screen2" method="_on_slider_changed" binds= [2]]

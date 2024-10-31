@@ -22,7 +22,11 @@ config/windows_native_icon="res://icon.ico"
 
 [audio]
 
-buses/default_bus_layout="res://audio/default_buses.tres"
+buses/default_bus_layout="res://default_buses.tres"
+
+[autoload]
+
+GlobalSettings="*res://GlobalSettings.gd"
 
 [display]
 
