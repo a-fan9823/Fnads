@@ -12,6 +12,15 @@ font_size = 25
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_m2tqj")
 
+[node name="ColorRect2" type="ColorRect" parent="."]
+top_level = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -149,9 +158,32 @@ offset_bottom = 26.0
 text = "Ambience volume"
 label_settings = SubResource("LabelSettings_6eh4t")
 
+[node name="OptionButton" type="OptionButton" parent="Screen2/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+selected = 0
+fit_to_longest_item = false
+item_count = 4
+popup/item_0/text = "Windowed"
+popup/item_1/text = "Fullscreen"
+popup/item_1/id = 3
+popup/item_2/text = "Maximized"
+popup/item_2/id = 2
+popup/item_3/text = "Borderless Windowed"
+popup/item_3/id = 1
+popup/item_3/disabled = true
+
+[node name="Label" type="Label" parent="Screen2/ScrollContainer/VBoxContainer/OptionButton"]
+layout_mode = 0
+offset_left = -227.0
+offset_right = -46.0
+offset_bottom = 26.0
+text = "Window Mode"
+label_settings = SubResource("LabelSettings_6eh4t")
+
 [connection signal="pressed" from="Screen1/StartGameBtn" to="." method="change_screen" binds= ["game"]]
 [connection signal="pressed" from="Screen1/SettingsBtn" to="." method="change_screen" binds= ["settings"]]
 [connection signal="pressed" from="Screen2/BackBtn" to="." method="change_screen" binds= ["main"]]
 [connection signal="value_changed" from="Screen2/ScrollContainer/VBoxContainer/HSlider" to="Screen2" method="_on_slider_changed" binds= [0]]
 [connection signal="value_changed" from="Screen2/ScrollContainer/VBoxContainer/HSlider2" to="Screen2" method="_on_slider_changed" binds= [1]]
 [connection signal="value_changed" from="Screen2/ScrollContainer/VBoxContainer/HSlider3" to="Screen2" method="_on_slider_changed" binds= [2]]
+[connection signal="item_selected" from="Screen2/ScrollContainer/VBoxContainer/OptionButton" to="Screen2" method="_on_option_button_item_selected"]

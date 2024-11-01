@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bpny7w44q3lst"]
+[gd_scene load_steps=17 format=3 uid="uid://bpny7w44q3lst"]
 
 [ext_resource type="Script" path="res://ui/ui.gd" id="1_coeg4"]
 [ext_resource type="FontFile" uid="uid://bedbafqcdtba4" path="res://assets/fonts/superstar_memesbruh03.ttf" id="2_fvxlv"]
@@ -11,6 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://c5ejlyes0v27k" path="res://ui/settings/settings.tscn" id="7_c42k5"]
 [ext_resource type="Script" path="res://ui/generator.gd" id="8_sr4vw"]
 [ext_resource type="Script" path="res://ui/files.gd" id="10_eeb0x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_acqqw"]
+bg_color = Color(0.599893, 0.0937819, 0.172442, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkyim"]
+bg_color = Color(0, 0.41181, 0.117235, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_3ls6s"]
 font = ExtResource("2_fvxlv")
@@ -353,7 +359,6 @@ color = Color(0.27171, 0.163794, 0.324938, 1)
 visible = false
 
 [node name="Generator" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -371,21 +376,15 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.118401, 0.148087, 0.175947, 1)
 
-[node name="HSplitContainer" type="HSplitContainer" parent="Generator"]
+[node name="ProgressBar" type="ProgressBar" parent="Generator"]
 layout_mode = 0
 offset_left = 452.0
 offset_top = 477.0
 offset_right = 1458.0
 offset_bottom = 615.0
-dragger_visibility = 2
-
-[node name="ColorRect" type="ColorRect" parent="Generator/HSplitContainer"]
-layout_mode = 2
-color = Color(0, 0.411765, 0.117647, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="Generator/HSplitContainer"]
-layout_mode = 2
-color = Color(0.6, 0.0941176, 0.172549, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_acqqw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jkyim")
+show_percentage = false
 
 [node name="Label" type="Label" parent="Generator"]
 layout_mode = 0
@@ -408,6 +407,7 @@ theme_override_font_sizes/font_size = 32
 text = "Back"
 
 [node name="Photos" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -445,14 +445,14 @@ offset_bottom = 1031.0
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Button" type="Button" parent="Photos"]
+[node name="back" type="Button" parent="Photos"]
 layout_mode = 0
 offset_left = 482.0
 offset_top = 399.0
 offset_right = 598.0
 offset_bottom = 582.0
 
-[node name="Label" type="Label" parent="Photos/Button"]
+[node name="Label" type="Label" parent="Photos/back"]
 layout_mode = 0
 offset_right = 116.0
 offset_bottom = 183.0
@@ -460,14 +460,14 @@ text = "<"
 label_settings = SubResource("LabelSettings_q57p7")
 horizontal_alignment = 1
 
-[node name="Button2" type="Button" parent="Photos"]
+[node name="next" type="Button" parent="Photos"]
 layout_mode = 0
 offset_left = 1266.0
 offset_top = 399.0
 offset_right = 1382.0
 offset_bottom = 582.0
 
-[node name="Label" type="Label" parent="Photos/Button2"]
+[node name="Label" type="Label" parent="Photos/next"]
 layout_mode = 0
 offset_right = 116.0
 offset_bottom = 183.0
@@ -501,5 +501,5 @@ vertical_alignment = 1
 [connection signal="pressed" from="Cameras/BackBtn" to="." method="hide_ui"]
 [connection signal="pressed" from="Generator/BackBtn" to="." method="hide_ui"]
 [connection signal="pressed" from="Photos/BackBtn" to="." method="hide_ui"]
-[connection signal="pressed" from="Photos/Button" to="Photos" method="_on_button_pressed"]
-[connection signal="pressed" from="Photos/Button2" to="Photos" method="_on_button_2_pressed"]
+[connection signal="pressed" from="Photos/back" to="Photos" method="_on_back_pressed"]
+[connection signal="pressed" from="Photos/next" to="Photos" method="_on_next_pressed"]
