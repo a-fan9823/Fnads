@@ -7,7 +7,7 @@ extends Control
 
 func on_slider_changed(value: float, id: int) -> void:
 	if id < 3:
-		change_volume([id, value])
+		global_settings.change_volume([id, value])
 	else:
 		change_target_fps(value)
 
@@ -23,22 +23,6 @@ func on_window_mode_selected(index: int) -> void:
 		#DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS,(window_modes[inx] == DisplayServer.WINDOW_FLAG_BORDERLESS))
 	else:
 		printerr("ERROR =(  : window_mode_change; index of change[",inx,"]")
-
-func float_to_db(value: float) -> float:
-	if value < 1:
-		return -80
-	else:
-		return -45 + (value / 100) * 40
-
-func change_volume(data:Array) -> void:
-	if data[0] < global_settings.settings["volume"].size() && data[0] < AudioServer.bus_count:
-		global_settings.settings["volume"][data[0]] = data[1]
-		var vol_db = float_to_db(data[1])
-		AudioServer.set_bus_volume_db(data[0],vol_db)
-		print("setting volume {",AudioServer.get_bus_name(data[0]),"}[",data[0],"] to ",vol_db,"  DB")
-		save_manager.save_game()
-	else:
-		printerr("OUT OF BOUNDS, attempt to change volume on channel [",data[0],"]")
 
 func change_target_fps(value:int):
 	if value >= 10:
