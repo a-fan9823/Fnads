@@ -1,32 +1,50 @@
 extends Control
 
-func _ready() -> void:
-	global_settings.emit_signal("target_fps_change",global_settings.default_fps)
-	global_settings.connect("on_os_window_mode_changed",Callable(self,"_update_dropdown"))
-	global_settings.connect("on_target_fps_changed",Callable(self,"_update_fps_spinbox"))
+@onready var optionbutton:= $ScrollContainer/VBoxContainer/OptionButton
+@onready var spinbox:= $ScrollContainer/VBoxContainer/HSlider4/SpinBox
+@onready var fps_slider:= $ScrollContainer/VBoxContainer/HSlider4
 
-func _on_slider_changed(value: float, id: int) -> void:
+
+func on_slider_changed(value: float, id: int) -> void:
 	if id < 3:
-		global_settings.emit_signal("volume_change",[id, value])
+		change_volume([id, value])
 	else:
-		global_settings.emit_signal("target_fps_change",value)
+		change_target_fps(value)
 
-func _update_fps_spinbox(value:int):
-	$ScrollContainer/VBoxContainer/HSlider4/SpinBox.value = value
-	$ScrollContainer/VBoxContainer/HSlider4.value = value
+func on_window_mode_selected(index: int) -> void:
+	var inx = optionbutton.get_item_id(index)
+	## borderless window does not seem to work on linux(I am unsure of windows), I have disabled this feature   --Walmart
+	if inx >= 0:
+		DisplayServer.window_set_mode(inx)
+		global_settings.settings["window_mode"] = inx
+		optionbutton.selected = index
+		prints(optionbutton.get_item_text(index),index)
+		save_manager.save_game()
+		#DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS,(window_modes[inx] == DisplayServer.WINDOW_FLAG_BORDERLESS))
+	else:
+		printerr("ERROR =(  : window_mode_change; index of change[",inx,"]")
 
-func _on_option_button_item_selected(index: int) -> void:
-	global_settings.emit_signal("window_mode_change",index)
+func float_to_db(value: float) -> float:
+	if value < 1:
+		return -80
+	else:
+		return -45 + (value / 100) * 40
 
-func _update_dropdown(index:int):
-	var optionbutton:= $ScrollContainer/VBoxContainer/OptionButton
-	match index:
-		0:
-			optionbutton.selected = index
-			prints(optionbutton.get_item_text(index),index)
-		2:
-			optionbutton.selected = index
-			prints(optionbutton.get_item_text(index),index)
-		3:
-			optionbutton.selected = 1
-			prints(optionbutton.get_item_text(index),index)
+func change_volume(data:Array) -> void:
+	if data[0] < global_settings.settings["volume"].size() && data[0] < AudioServer.bus_count:
+		global_settings.settings["volume"][data[0]] = data[1]
+		var vol_db = float_to_db(data[1])
+		AudioServer.set_bus_volume_db(data[0],vol_db)
+		print("setting volume {",AudioServer.get_bus_name(data[0]),"}[",data[0],"] to ",vol_db,"  DB")
+		save_manager.save_game()
+	else:
+		printerr("OUT OF BOUNDS, attempt to change volume on channel [",data[0],"]")
+
+func change_target_fps(value:int):
+	if value >= 10:
+		Engine.max_fps = value
+		global_settings.settings["fps"] = value
+		spinbox.value = value
+		fps_slider.value = value
+		print("setting target fps to [",value,"]")
+		save_manager.save_game()

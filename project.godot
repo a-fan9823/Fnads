@@ -27,6 +27,8 @@ buses/default_bus_layout="res://default_buses.tres"
 [autoload]
 
 global_settings="*res://global_settings.gd"
+game_state="*res://game_state.gd"
+save_manager="*res://save_manager.gd"
 
 [display]
 

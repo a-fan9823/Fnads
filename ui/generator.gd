@@ -9,10 +9,10 @@ func _ready() -> void:
 	label.text = str(level,'%')
 	bar.value = bar.max_value * (float(level) / 100)
 	game_root.connect("on_power_level_changed",Callable(self,"on_power_change"))
+
 func on_power_change(level:int) -> void:
 	if level == 0:
 		label.text = str("OUT OF POWER!")
-		bar.value = bar.size.x * (float(0) / 100)
 	else:
 		label.text = str(level,'%')
 		bar.value = bar.size.x * (float(level) / 100)

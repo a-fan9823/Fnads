@@ -27,13 +27,17 @@ func _on_next_pressed() -> void:
 		load_img()
 
 func load_img() -> void:
+	
+	##We could also think about loading them only once instead of every time we display them. For that you can change the String array
+	##to a Texture2D array.  --hede wan
+	
 	var file_path = loadable_pics[pic_inx]
 	
 	# Show loading label and hide the texture
 	label.show()
 	texture_rect.hide()
 
-	var image_resource = load(ProjectSettings.globalize_path(file_path))
+	var image_resource = load(file_path)
 
 	texture_rect.texture = image_resource
 	texture_rect.show()  # Show the image
