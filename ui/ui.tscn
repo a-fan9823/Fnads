@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bpny7w44q3lst"]
+[gd_scene load_steps=16 format=3 uid="uid://bpny7w44q3lst"]
 
 [ext_resource type="Script" path="res://ui/ui.gd" id="1_coeg4"]
 [ext_resource type="FontFile" uid="uid://bedbafqcdtba4" path="res://assets/fonts/superstar_memesbruh03.ttf" id="2_fvxlv"]
@@ -25,10 +25,6 @@ font_size = 151
 [sub_resource type="LabelSettings" id="LabelSettings_q57p7"]
 font = ExtResource("2_fvxlv")
 font_size = 186
-
-[sub_resource type="LabelSettings" id="LabelSettings_rg7kr"]
-font = ExtResource("2_fvxlv")
-font_size = 76
 
 [node name="UI" type="CanvasLayer" groups=["UI"]]
 script = ExtResource("1_coeg4")
@@ -474,17 +470,6 @@ offset_bottom = 183.0
 text = ">"
 label_settings = SubResource("LabelSettings_q57p7")
 horizontal_alignment = 1
-
-[node name="Label" type="Label" parent="Photos"]
-layout_mode = 0
-offset_left = 746.0
-offset_top = 399.0
-offset_right = 1092.0
-offset_bottom = 590.0
-text = "loading..."
-label_settings = SubResource("LabelSettings_rg7kr")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [connection signal="pressed" from="Desktop/PhotosIcon" to="." method="show_screen" binds= ["Photos"]]
 [connection signal="pressed" from="Desktop/MonitoringIcon" to="." method="show_screen" binds= ["Cameras"]]

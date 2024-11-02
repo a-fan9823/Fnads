@@ -1,5 +1,6 @@
 extends Camera2D
 
+@export var loading_screen:Node
 
 func _input(event):
 	if event is InputEventMouseMotion:
