@@ -7,6 +7,7 @@ func _ready():
 	for screen in children:
 		if screen is Control:
 			screens.push_back(screen)
+			screen.connect("request_window_close",Callable(self,"hide_ui"))
 	hide_ui()
 
 func hide_ui():

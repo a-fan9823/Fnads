@@ -1,0 +1,94 @@
+[gd_scene load_steps=5 format=3 uid="uid://ol04lqy56fdk"]
+
+[ext_resource type="Script" path="res://ui/Photos/photos.gd" id="1_hwvgn"]
+[ext_resource type="FontFile" uid="uid://bedbafqcdtba4" path="res://assets/fonts/superstar_memesbruh03.ttf" id="2_4m0th"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_scra8"]
+font = ExtResource("2_4m0th")
+font_size = 73
+
+[sub_resource type="LabelSettings" id="LabelSettings_psou6"]
+font = ExtResource("2_4m0th")
+font_size = 186
+
+[node name="Photos" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hwvgn")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.118401, 0.148087, 0.175947, 1)
+
+[node name="BackBtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 837.0
+offset_top = 23.0
+offset_right = 1034.0
+offset_bottom = 98.0
+theme_override_fonts/font = ExtResource("2_4m0th")
+theme_override_font_sizes/font_size = 32
+text = "Back"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 676.0
+offset_top = 256.0
+offset_right = 1197.0
+offset_bottom = 1031.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 166.0
+offset_right = 1828.0
+offset_bottom = 271.0
+label_settings = SubResource("LabelSettings_scra8")
+horizontal_alignment = 1
+vertical_alignment = 3
+text_overrun_behavior = 3
+
+[node name="back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 482.0
+offset_top = 399.0
+offset_right = 598.0
+offset_bottom = 582.0
+
+[node name="Label" type="Label" parent="back"]
+layout_mode = 0
+offset_right = 116.0
+offset_bottom = 183.0
+text = "<"
+label_settings = SubResource("LabelSettings_psou6")
+horizontal_alignment = 1
+
+[node name="next" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1266.0
+offset_top = 399.0
+offset_right = 1382.0
+offset_bottom = 582.0
+
+[node name="Label" type="Label" parent="next"]
+layout_mode = 0
+offset_right = 116.0
+offset_bottom = 183.0
+text = ">"
+label_settings = SubResource("LabelSettings_psou6")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="BackBtn" to="." method="on_close_button_pressed"]
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="next" to="." method="_on_next_pressed"]

@@ -19,11 +19,19 @@ func on_window_mode_selected(index: int) -> void:
 		global_settings.settings["window_mode"] = inx
 		optionbutton.selected = index
 		prints(optionbutton.get_item_text(index),index)
-		save_manager.save_game()
+		save_manager.save_game(global_settings.settings)
 		#DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS,(window_modes[inx] == DisplayServer.WINDOW_FLAG_BORDERLESS))
 	else:
 		printerr("ERROR =(  : window_mode_change; index of change[",inx,"]")
+		
+func _ready() -> void:
+	_prev_win_mode = DisplayServer.window_get_mode()
 
+var _prev_win_mode
+func _process(delta: float) -> void:
+	if _prev_win_mode != DisplayServer.window_get_mode():
+		on_window_mode_selected(DisplayServer.window_get_mode())
+		_prev_win_mode = DisplayServer.window_get_mode()
 func change_target_fps(value:int):
 	if value >= 10:
 		Engine.max_fps = value
@@ -31,4 +39,4 @@ func change_target_fps(value:int):
 		spinbox.value = value
 		fps_slider.value = value
 		print("setting target fps to [",value,"]")
-		save_manager.save_game()
+		save_manager.save_game(global_settings.settings)

@@ -7,7 +7,7 @@ extends Control
 @onready var from_to: Label = $Sidebar/MainScreen/EmailDisplayArea/EmailContent/VBoxContainer/ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer/FromTo;
 @onready var date: Label = $Sidebar/MainScreen/EmailDisplayArea/EmailContent/VBoxContainer/ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer/Date;
 @onready var message: Label = $Sidebar/MainScreen/EmailDisplayArea/EmailContent/VBoxContainer/ScrollContainer/VBoxContainer/MarginContainer2/Message;
-var email_button: PackedScene = preload("res://ui/apps/email/email_button.tscn");
+var email_button: PackedScene = preload("res://ui/email/email_button.tscn");
 
 ## The amount of emails the player has got and are visible to them.
 @export var sent_emails: int = 0;

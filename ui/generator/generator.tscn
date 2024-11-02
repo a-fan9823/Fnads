@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://blmbc2hihmb66"]
+
+[ext_resource type="Script" path="res://ui/generator/generator.gd" id="1_t86kw"]
+[ext_resource type="FontFile" uid="uid://bedbafqcdtba4" path="res://assets/fonts/superstar_memesbruh03.ttf" id="2_wklj5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hxlej"]
+bg_color = Color(0.599893, 0.0937819, 0.172442, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6pub0"]
+bg_color = Color(0, 0.41181, 0.117235, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_oop3i"]
+font = ExtResource("2_wklj5")
+font_size = 151
+
+[node name="Generator" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t86kw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.118401, 0.148087, 0.175947, 1)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 452.0
+offset_top = 477.0
+offset_right = 1458.0
+offset_bottom = 615.0
+theme_override_styles/background = SubResource("StyleBoxFlat_hxlej")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6pub0")
+show_percentage = false
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 296.0
+offset_right = 1409.0
+offset_bottom = 448.0
+label_settings = SubResource("LabelSettings_oop3i")
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="BackBtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 837.0
+offset_top = 23.0
+offset_right = 1034.0
+offset_bottom = 98.0
+theme_override_fonts/font = ExtResource("2_wklj5")
+theme_override_font_sizes/font_size = 32
+text = "Back"
+
+[connection signal="pressed" from="BackBtn" to="." method="on_close_button_pressed"]

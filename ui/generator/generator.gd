@@ -16,3 +16,6 @@ func on_power_change(level:int) -> void:
 	else:
 		label.text = str(level,'%')
 		bar.value = bar.size.x * (float(level) / 100)
+
+signal request_window_close
+func on_close_button_pressed(): emit_signal("request_window_close")

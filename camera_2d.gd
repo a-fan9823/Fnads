@@ -1,7 +1,5 @@
 extends Camera2D
 
-@export var loading_screen:Node
-
 func _input(event):
 	if event is InputEventMouseMotion:
 		global_position.x = ((event.position.x / 500) - 1) * 200
