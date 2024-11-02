@@ -1,4 +1,4 @@
-class_name LoadSaveManager
+extends Node
 
 func save_game(settings: Dictionary) -> void:	
 	var save_str : String = JSON.stringify(settings, "\t");

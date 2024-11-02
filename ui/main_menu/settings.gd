@@ -17,21 +17,22 @@ func on_window_mode_selected(index: int) -> void:
 	if inx >= 0:
 		DisplayServer.window_set_mode(inx)
 		global_settings.settings["window_mode"] = inx
-		optionbutton.selected = index
-		prints(optionbutton.get_item_text(index),index)
+		optionbutton.selected = inx
+		prints(optionbutton.get_item_text(index),inx)
 		save_manager.save_game(global_settings.settings)
 		#DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS,(window_modes[inx] == DisplayServer.WINDOW_FLAG_BORDERLESS))
 	else:
 		printerr("ERROR =(  : window_mode_change; index of change[",inx,"]")
-		
-func _ready() -> void:
-	_prev_win_mode = DisplayServer.window_get_mode()
 
-var _prev_win_mode
-func _process(delta: float) -> void:
+
+@onready var _prev_win_mode = DisplayServer.window_get_mode()
+func _process(_delta: float) -> void:
 	if _prev_win_mode != DisplayServer.window_get_mode():
-		on_window_mode_selected(DisplayServer.window_get_mode())
 		_prev_win_mode = DisplayServer.window_get_mode()
+		for i in $ScrollContainer/VBoxContainer/OptionButton.item_count:
+			if $ScrollContainer/VBoxContainer/OptionButton.get_item_id(i) == DisplayServer.window_get_mode():
+				on_window_mode_selected(i)
+
 func change_target_fps(value:int):
 	if value >= 10:
 		Engine.max_fps = value

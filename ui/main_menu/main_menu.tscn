@@ -192,15 +192,12 @@ label_settings = SubResource("LabelSettings_5ran0")
 layout_mode = 2
 selected = 0
 fit_to_longest_item = false
-item_count = 4
+item_count = 3
 popup/item_0/text = "Windowed"
 popup/item_1/text = "Fullscreen"
 popup/item_1/id = 3
 popup/item_2/text = "Maximized"
 popup/item_2/id = 2
-popup/item_3/text = "Borderless Windowed"
-popup/item_3/id = 11
-popup/item_3/disabled = true
 
 [node name="Label" type="Label" parent="Screen2/ScrollContainer/VBoxContainer/OptionButton"]
 layout_mode = 0
@@ -241,9 +238,4 @@ rounded = true
 [connection signal="pressed" from="Screen1/StartGameBtn" to="." method="change_screen" binds= ["game"]]
 [connection signal="pressed" from="Screen1/SettingsBtn" to="." method="change_screen" binds= ["settings"]]
 [connection signal="pressed" from="Screen2/BackBtn" to="." method="change_screen" binds= ["main"]]
-[connection signal="value_changed" from="Screen2/ScrollContainer/VBoxContainer/HSlider" to="Screen2" method="on_slider_changed" binds= [0]]
-[connection signal="value_changed" from="Screen2/ScrollContainer/VBoxContainer/HSlider2" to="Screen2" method="on_slider_changed" binds= [1]]
-[connection signal="value_changed" from="Screen2/ScrollContainer/VBoxContainer/HSlider3" to="Screen2" method="on_slider_changed" binds= [2]]
 [connection signal="item_selected" from="Screen2/ScrollContainer/VBoxContainer/OptionButton" to="Screen2" method="on_window_mode_selected"]
-[connection signal="value_changed" from="Screen2/ScrollContainer/VBoxContainer/HSlider4" to="Screen2" method="on_slider_changed" binds= [4]]
-[connection signal="value_changed" from="Screen2/ScrollContainer/VBoxContainer/HSlider4/SpinBox" to="Screen2" method="on_slider_changed" binds= [4]]
