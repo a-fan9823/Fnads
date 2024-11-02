@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0dfo8lc0utw8"]
+[gd_scene load_steps=7 format=3 uid="uid://c0dfo8lc0utw8"]
 
 [ext_resource type="FontFile" uid="uid://bedbafqcdtba4" path="res://assets/fonts/superstar_memesbruh03.ttf" id="1_ee1jd"]
 [ext_resource type="Script" path="res://ui/main_menu/main_menu.gd" id="1_m2tqj"]
 [ext_resource type="Texture2D" uid="uid://bt2ox8jxjg30f" path="res://assets/sprites/cerber_bg.png" id="3_bajt5"]
 [ext_resource type="Script" path="res://ui/main_menu/settings.gd" id="4_wmhq3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5ran0"]
+font = ExtResource("1_ee1jd")
+font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_6eh4t"]
 font = ExtResource("1_ee1jd")
@@ -119,6 +123,18 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 56
 
+[node name="HSeparator2" type="HSeparator" parent="Screen2/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="Screen2/ScrollContainer/VBoxContainer/HSeparator2"]
+offset_left = -326.0
+offset_top = -6.0
+offset_right = -26.0
+offset_bottom = 34.0
+text = "Audio Settings"
+label_settings = SubResource("LabelSettings_5ran0")
+
 [node name="HSlider" type="HSlider" parent="Screen2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 value = 100.0
@@ -158,6 +174,18 @@ offset_bottom = 26.0
 text = "Ambience volume"
 label_settings = SubResource("LabelSettings_6eh4t")
 
+[node name="HSeparator" type="HSeparator" parent="Screen2/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="Screen2/ScrollContainer/VBoxContainer/HSeparator"]
+offset_left = -326.0
+offset_top = -6.0
+offset_right = -26.0
+offset_bottom = 34.0
+text = "Display Settings"
+label_settings = SubResource("LabelSettings_5ran0")
+
 [node name="OptionButton" type="OptionButton" parent="Screen2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 selected = 0
@@ -180,6 +208,33 @@ offset_bottom = 26.0
 text = "Window Mode"
 label_settings = SubResource("LabelSettings_6eh4t")
 
+[node name="HSlider4" type="HSlider" parent="Screen2/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 10.0
+max_value = 360.0
+value = 60.0
+rounded = true
+tick_count = 3
+
+[node name="Label" type="Label" parent="Screen2/ScrollContainer/VBoxContainer/HSlider4"]
+offset_left = -227.0
+offset_top = -4.0
+offset_right = -46.0
+offset_bottom = 22.0
+text = "Target fps"
+label_settings = SubResource("LabelSettings_6eh4t")
+
+[node name="SpinBox" type="SpinBox" parent="Screen2/ScrollContainer/VBoxContainer/HSlider4"]
+layout_mode = 0
+offset_left = -94.0
+offset_top = -7.0
+offset_right = -10.9375
+offset_bottom = 24.0
+min_value = 10.0
+max_value = 360.0
+value = 60.0
+rounded = true
+
 [connection signal="pressed" from="Screen1/StartGameBtn" to="." method="change_screen" binds= ["game"]]
 [connection signal="pressed" from="Screen1/SettingsBtn" to="." method="change_screen" binds= ["settings"]]
 [connection signal="pressed" from="Screen2/BackBtn" to="." method="change_screen" binds= ["main"]]
@@ -187,3 +242,5 @@ label_settings = SubResource("LabelSettings_6eh4t")
 [connection signal="value_changed" from="Screen2/ScrollContainer/VBoxContainer/HSlider2" to="Screen2" method="_on_slider_changed" binds= [1]]
 [connection signal="value_changed" from="Screen2/ScrollContainer/VBoxContainer/HSlider3" to="Screen2" method="_on_slider_changed" binds= [2]]
 [connection signal="item_selected" from="Screen2/ScrollContainer/VBoxContainer/OptionButton" to="Screen2" method="_on_option_button_item_selected"]
+[connection signal="value_changed" from="Screen2/ScrollContainer/VBoxContainer/HSlider4" to="Screen2" method="_on_slider_changed" binds= [3]]
+[connection signal="value_changed" from="Screen2/ScrollContainer/VBoxContainer/HSlider4/SpinBox" to="Screen2" method="_on_slider_changed" binds= [3]]

@@ -1,16 +1,27 @@
 extends Node
 #array[0] volume
 #array[1] display
-var settings_array: =[[1,1,1],[0]]
+const default_fps:= 60
+
+var settings_array: =[[1,1,1],[0,default_fps]]
 signal volume_change(Array)
 signal window_mode_change(int)
 const window_modes = [DisplayServer.WINDOW_MODE_WINDOWED,DisplayServer.WINDOW_MODE_FULLSCREEN,DisplayServer.WINDOW_MODE_MAXIMIZED]#,DisplayServer.WINDOW_FLAG_BORDERLESS]
-signal on_os_window_mode_changed(int)
+signal on_os_window_mode_changed(int) #README!!  use this for when looking for window mode changes, NOT "window_mode_change" <- this is a method to change it not get
+signal target_fps_change(int)
+signal on_target_fps_changed(int)
 
 func _ready() -> void:
 	_prev_win_mode = DisplayServer.window_get_mode()
 	connect("volume_change",Callable(self,"_on_volume_change"))
+	connect("target_fps_change",Callable(self,"_on_target_fps_change"))
 	connect("window_mode_change",Callable(self,"_on_window_mode_change"))
+
+func _on_target_fps_change(value:int):
+	if value >= 10:
+		Engine.max_fps = value
+		settings_array[1][1] = value
+		emit_signal("on_target_fps_changed",Engine.max_fps)
 
 var _prev_win_mode
 func _process(delta: float) -> void:
